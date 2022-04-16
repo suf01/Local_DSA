@@ -77,6 +77,30 @@ void levelorder(node* root){
     }
 }
 
+vector<vector<int> > level_order(node* root){
+    queue<node*> q;
+
+    vector<vector<int> > ans;
+
+    q.push(root);
+
+    while(!q.empty()){
+        int n = q.size();
+        vector<int> inter;
+
+        while(n){
+            node* temp = q.front();
+            if(temp->left != NULL) q.push(temp->left);
+            if(temp->right != NULL) q.push(temp->right);
+            inter.push_back(temp->data);
+            q.pop();
+            n--;
+        }
+        ans.push_back(inter);
+    }
+    return ans;
+}
+
 int maxdepth(node* root){
     if(root == NULL){
         return 0;
