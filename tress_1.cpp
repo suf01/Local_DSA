@@ -169,6 +169,16 @@ int maxsumpath(node* root){
     return maxi;
 }
 
+bool is_identical(node* p, node* q){
+    if(p == NULL || q == NULL){
+        return (p == q);
+    }
+
+    return (p->data == q->data) &&
+    is_identical(p->left, q->left) &&
+    is_identical(p->right, q->right);
+}
+
 void sprialtraversal(node* root){ 
 
     if(root == NULL){
