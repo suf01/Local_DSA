@@ -119,7 +119,7 @@ int diam(node* root, int &diameter){
     int lh = diam(root->left, diameter);
     int rh = diam(root->right, diameter);
 
-    diameter = max(diameter, lh+rh+1);
+    diameter = max(diameter, lh+rh);
 
     return max(lh, rh)+1;
 }
@@ -135,10 +135,13 @@ int isbalanced(node* root){
         return 0;
     }
     int lh = isbalanced(root->left);
+    if(lh == -1) return -1;
+    
     int rh = isbalanced(root->right);
+    if(rh == -1) return -1;
 
     if(abs(lh-rh>1)){
-        return 0;
+        return -1;
     }
 
     return max(lh, rh)+1;
