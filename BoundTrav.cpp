@@ -14,54 +14,76 @@ public:
     }
 };
 
-void leftboundary(node* root){
-    if(root == NULL){
-        return;
-    }
-
-    if(root->left != NULL){
-        cout<<root->data<<" ";
-        leftboundary(root->left);
-    }else if(root->right != NULL){
-        cout<<root->data<<" ";
-        leftboundary(root->right);
+bool leafnode(node* temp){
+    if(temp->left==NULL && temp->right==NULL){
+        return true;
+    }else{
+        return false;
     }
 }
 
-void leafboundary(node* root){
-    if(root == NULL){
-        return;
-    }
-    leafboundary(root->left);
-    if(root->left == NULL && root->right == NULL){
-        cout<<root->data<<" ";
-    }
-    leafboundary(root->right);
-}
+void addleft(node* root, vector<int> &ans){
+    node* temp = root;
 
-void rightboundary(node* root){
-    if(root == NULL){
-        return;
-    }
+    while(temp){
+        if(!leafnode(temp)) ans.push_back(temp->data);
 
-    if(root->right != NULL){
-        rightboundary(root->right);
-        cout<<root->data<<" ";
-    }else if(root->left != NULL){
-        rightboundary(root->left);
-        cout<<root->data<<" ";
+        if(temp->left!=NULL){
+            temp = temp->left;
+        }else{
+            temp = temp->right;
+        }
     }
 }
 
-void boundarytrav(node* root){
-    if(root == NULL){
-        return;
+void addrigth(node* root, vector<int> &ans){
+    node* temp = root->right;
+    stack<node*> st;
+
+    while(temp){
+        if(!leafnode(temp)){
+            st.push(temp);
+        }
+
+        if(temp->right!=NULL){
+            temp = temp->right;
+        }else{
+            temp = temp->left;
+        }
     }
-    cout<<root->data<<" ";
-    leftboundary(root->left);
-    leafboundary(root->left);
-    leafboundary(root->right);
-    rightboundary(root->right);
+
+    while(!st.empty()){
+        node* ele = st.top();
+        st.pop();
+        ans.push_back(ele->data);
+    }
+}
+
+void addleaf(node* root, vector<int> &ans){
+    node* temp = root;
+
+    if(leafnode(temp)){
+        ans.push_back(temp->data);
+    }
+
+    if(temp->left!=NULL){
+        addleaf(temp->left, ans);
+    }
+
+    if(temp->right!=NULL){
+        addleaf(temp->right, ans);
+    }
+}
+
+vector<int> boundary_traversal(node* root){
+    vector<int> ans;
+    if(root == NULL) return ans;
+
+    addleft(root, ans);
+    addleaf(root, ans);
+    addrigth(root, ans);
+
+    return ans;
 }
 
 int main(){
@@ -74,5 +96,9 @@ int main(){
     root->right->right = new node(7);
     root->right->left = new node(8);
 
-    boundarytrav(root);
+    bector<int> ans = boundary_traversal(root);
+    
+    for(auto it: ans){
+        cout<<it<<" ";
+    }
 }
