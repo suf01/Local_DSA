@@ -14,20 +14,24 @@ public:
     }
 };
 
-bool isSymmetricHelp(node* left, node* right){
-    if(left == NULL || right == NULL){
-        return left == right;
+bool isSymmetricHelp(node* root1, node* root2){
+    if(root1 == NULL || root2 == NULL){
+        return root1 == root2;
     }
 
-    if(left->data != right->data){
+    if(root1->data != root2->data){
         return false;
     }
 
-    return isSymmetricHelp(left->left, right->right) && isSymmetricHelp(left->right, right->left);
+    return isSymmetricHelp(root1->left, root2->right) && isSymmetricHelp(root1->right, root2->left);
 }
 
 bool isSymmetric(node* root){
-    return root == NULL || isSymmetricHelp(root->left, root->right);
+    if(root == NULL){
+        return false;
+    }
+    
+    return isSymmetricHelp(root->left, root->right);
 }
 
 
