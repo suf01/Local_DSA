@@ -1,5 +1,40 @@
 #include<bits/stdc++.h>
 using namespace std;
+
+/*
+range for numbers (-2^(n-1) to (2^(n-1)-1) where n is number of bits;
++ve numbers are directly converted into binary and stored;
+-ve numbers are first converted into 2's compliment and then the corresponding value is stored with -ve sign;
+i,e why n bit number can only store 2^(n-1) values as 1 bit(msb) is reserved for sign;
+*/
+
+/*
+to ON a bit use |
+to OFF a bit use &
+to toggle a bit use ^
+*/
+
+/*
+x ^ 1 = ~x
+x ^ 0 = x
+*/
+
+/*
+if x is a number ~x is one's compliment of x;
+if x is a number -x is the two's compliment of x
+*/
+
+//right most set bit mask = x & -x
+
+/*
+Kernighan's Algorithm: check no of set bits in a number in O(1)
+while(n){
+  rsbm = n & -n;
+  n = n - rsbm;
+  cnt++;
+}
+*/
+
 void printbin(int num){
     //print bin
     for(int i = 10; i >= 0; i--){
