@@ -471,11 +471,11 @@ void validate_Children_Sum_Property(node* &root){
     
     if(sum < temp->data){
         if(temp->left){
-            temp->left->data = sum;
+            temp->left->data = temp->data;
         }
 
         if(temp->right){
-            temp->right->data = sum;
+            temp->right->data = temp->data;
         }
     }else{
         temp->data = sum;
