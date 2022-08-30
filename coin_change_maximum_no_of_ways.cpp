@@ -1,9 +1,10 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-long long int count(int coins[], int N, int sum){
+//unbounded knapsack + count no of subset sum
 
-    // code here.
+long long int count(int coins[], int N, int sum){
+   
     long long int dp[N+1][sum+1];
     memset(dp, 0, sizeof(dp));
         
