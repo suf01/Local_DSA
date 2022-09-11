@@ -1,6 +1,9 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//bubble sort B->O(n), W-> O(n^2), O(1)
+
+// B-> O(n), W->O(n^2), O(1)
 void insertion_sort(vector<int> &v){
     int n = v.size();
 
@@ -16,6 +19,7 @@ void insertion_sort(vector<int> &v){
     }
 }
 
+// B->O(n^2), W->O(n^2), O(1)
 void selection_sort(vector<int> &v){
     int n = v.size();
 
@@ -36,6 +40,7 @@ void selection_sort(vector<int> &v){
     }
 }
 
+// B-> O(n*logn), W->O(n*logn), O(n)
 void merge(vector<int> &v, int lo, int mid, int hi){
     int n = v.size();
 
@@ -86,6 +91,7 @@ void merge_sort(vector<int> &v, int lo, int hi){
     }
 }
 
+//B->O(n*logn), W->O(n^2), O(logn)
 int partition(vector<int> &v, int lo, int hi){
     int pivot = v[lo];
     int i = lo;
@@ -118,6 +124,37 @@ void quick_sort(vector<int> &v, int lo, int hi){
         int pivot = partition(v, lo, hi);
         quick_sort(v, lo, pivot-1);
         quick_sort(v, pivot+1, hi);
+    }
+}
+
+// B->O(N+k) W->O(N+k) or O(max(N, arr)), O(k)
+void count_sort(vector<int> &v){
+    int n = v.size();
+
+    int k = 0;
+    for(int i = 0; i < n; i++){
+        k = max(k, v[i]);
+    }
+
+    vector<int> temp(k+1);
+
+    
+    for(int i = 0; i < n; i++){
+        temp[v[i]]++;
+    }
+
+    for(int i = 1; i < temp.size(); i++){
+        temp[i] += temp[i-1];
+    }
+
+    vector<int> ans(n);
+    for(int i = n-1; i >= 0; i--){
+        temp[v[i]]--;
+        ans[temp[v[i]]] = v[i];
+    }
+
+    for(int i = 0; i < n; i++){
+        v[i] = ans[i];
     }
 }
 
