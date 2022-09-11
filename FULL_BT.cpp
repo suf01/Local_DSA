@@ -854,10 +854,10 @@ vector<int> morris_preorder(node* root){
 
             if(prev->right == NULL){
                 prev->right = curr;
+                preorder.push_back(curr->data);
                 curr = curr->left;
             }else{
                 prev->right = NULL;
-                preorder.push_back(curr->data);
                 curr = curr->right;
             }
         }
