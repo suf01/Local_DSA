@@ -1,6 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
-
+/*
+   toposort is linear ordering of vertices, such that for every edge u --> v, u always comes before v
+*/
 void findtopodfs(int node, vector<int> adjL[], vector<int> &visited, stack<int> &st){
 	visited[node] = 1;
 
