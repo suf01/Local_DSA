@@ -1,6 +1,34 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+//gfg
+vector <int> dijkstra(int V, vector<vector<int>> adj[], int S){
+
+    vector<int> dis(V, INT_MAX);
+    
+    dis[S] = 0;
+        
+    priority_queue<pair<int, int>, vector<pair<int, int> > , greater<pair<int, int>> > q;
+    q.push({dis[S], S});
+        
+    while(!q.empty()){
+        int node = q.top().second;
+        int prev_dis = q.top().first;
+        q.pop();
+            
+        for(auto it: adj[node]){
+            int ele = it[0];
+            int wght = it[1];
+                
+            if(prev_dis + wght < dis[ele]){
+                dis[ele] = prev_dis + wght;
+                q.push({dis[ele], ele});
+            }
+        }
+    }
+    return dis;
+}
+
 void dijkstras(int V, int scr, vector<pair<int, int> > adjL[]){
 	vector<int> dist(V+1, INT_MAX);
 
