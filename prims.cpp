@@ -1,6 +1,13 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+/*
+  spannig tree -> if a graph can be converted into a tree with N nodes and N-1 edges.
+  minimum sp -> spanning tree having minimum edge weights(sum of edge weights is minimum).
+  * prims algo
+  * kruskals algo
+*/
+
 void primsbf(int V, vector<pair<int, int> > adjL[]){
 	vector<int> key(V, INT_MAX);
 	vector<int> parent(V, -1);
