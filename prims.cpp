@@ -8,75 +8,92 @@ using namespace std;
   * kruskals algo
 */
 
-void primsbf(int V, vector<pair<int, int> > adjL[]){
-	vector<int> key(V, INT_MAX);
-	vector<int> parent(V, -1);
-	vector<bool> mstset(V, false);
+#include<bits/stdc++.h>
+using namespace std;
 
-	key[0] = 0;
-	parent[0] = -1;
-
-	for(int i = 0; i < V-1; i++){
-		int mini = INT_MAX;
-		int u;
-
-		for(int v = 0; v < V; v++){
-			if(mstset[v] == false && key[v] < mini){
-				mini = key[v];
-				u = v;
-			}
-
-			mstset[u] = true;
-
-			for(auto ele : adjL[u]){
-				int v = ele.first;
-				int weight = ele.second;
-
-				if(mstset[v] == false && weight < key[v]){
-					key[v] = weight;
-					parent[v] = u;
-				}
-			}
-		}
-	}
-
-	for(int i = 1; i < V; i++){
-		cout<<parent[i]<<" - "<<i<<" ";
-	}
+//brute force
+int spanningTree(int V, vector<vector<int>> adj[]){
+   
+    vector<int> dist(V, INT_MAX);
+    dist[0] = 0;
+        
+    vector<bool> mst(V, false);
+	
+    //use parent only if u want to get the actual graph    
+    vector<int> parent(V, -1);
+        
+    for(int edges = 0; edges < V-1; edges++){
+        int least_dist = INT_MAX;
+            
+        int node;
+        for(int i = 0; i < V; i++){
+            if(mst[i] == false && dist[i] < least_dist){
+                least_dist = dist[i];
+                node = i;
+            }
+        }
+            
+        mst[node] = true;
+            
+        for(auto it: adj[node]){
+            int ele = it[0];
+            int wgt = it[1];
+                
+            if(mst[ele] == false && wgt < dist[ele]){
+                dist[ele] = wgt;
+                parent[ele] = node;
+            }
+        }
+    }
+        
+    int cost = 0;
+    for(int i = 0; i < V; i++){
+        cost += dist[i];
+    }
+    
+    return cost;
 }
 
-void primsop(int V, vector<pair<int, int> > adjL[]){
-	vector<int> key(V, INT_MAX);
-	vector<int> parent(V, -1);
-	vector<bool> mstset(V, false);
-
-	key[0] = 0;
-	parent[0] = -1;
-
-	priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>> > q;
-	q.push({key[0], 0});
-
-	for(int i = 0; i < V-1; i++){
-		int u = q.top().second;
-		q.pop();
-
-		for(auto ele : adjL[u]){
-			int v = ele.first;
-			int weight = ele.second;
-
-			if(mstset[v] == false && weight < key[v]){
-				key[v] = weight;
-				parent[v] = u;
-
-				q.push({key[v], v});
-			}
-		}
-
-	}
-
-	for(int i = 1 ; i < V; i++){
-		cout<<parent[i]<<" - "<<i<<" ";
-	}
+//optimization
+int spanningTree(int V, vector<vector<int>> adj[]){
+    
+    vector<int> dist(V, INT_MAX);
+    dist[0] = 0;
+        
+    vector<bool> mst(V, false);
+        
+    vector<int> parent(V, -1);
+        
+    priority_queue<pair<int, int>, vector<pair<int, int> >, greater<pair<int, int> > > q;
+        
+    //{dist, node} 
+    q.push({0, 0});
+    
+    //must use q.empty() only dont run for loops for V-1 times
+    while(!q.empty()){
+            
+        int node  = q.top().second;
+        q.pop();
+            
+        mst[node] = true;
+            
+        for(auto it: adj[node]){
+            int ele = it[0];
+            int wgt = it[1];
+                
+            if(mst[ele] == false && wgt < dist[ele]){
+                parent[ele] = node;
+                dist[ele] = wgt;
+                q.push({dist[ele], ele});
+            }
+        }
+    }
+        
+    int cost = 0;
+    for(int i = 0; i < V; i++){
+        cost += dist[i];
+    }
+    return cost;
 }
 
 int main(){
