@@ -8,9 +8,6 @@ using namespace std;
   * kruskals algo
 */
 
-#include<bits/stdc++.h>
-using namespace std;
-
 //brute force
 int spanningTree(int V, vector<vector<int>> adj[]){
    
