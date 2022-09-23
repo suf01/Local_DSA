@@ -14,13 +14,14 @@ i,e why n bit number can only store 2^(n-1) values as 1 bit(msb) is reserved for
 */
 
 /*
+
 binary to decimal
-1. if +ve convert to decimal
-2. if -ve then take 2's compliment of the binary number, and store the corresponding value with -ve sign
+1. if +ve i.e msb = 0 convert to decimal
+2. if -ve i.e msb = 1 then take 2's compliment of the binary number, and store the corresponding value with -ve sign
 
 decimal to binary
 1. if +ve convert to binary
-2. if -ve
+2. if -ve, leave -ve sign convert to binary takes its two's compliement, and store it
 
 */
 
