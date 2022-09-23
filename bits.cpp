@@ -3,9 +3,14 @@ using namespace std;
 
 /*
 range for numbers (-2^(n-1) to (2^(n-1)-1) where n is number of bits;
+
+byte   short  int    long
+ 8      16     32     64
+ 
 +ve numbers are directly converted into binary and stored;
 -ve numbers are first converted into 2's compliment and then the corresponding value is stored with -ve sign;
 i,e why n bit number can only store 2^(n-1) values as 1 bit(msb) is reserved for sign;
+
 */
 
 /*
