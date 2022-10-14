@@ -31,6 +31,8 @@ vector<vector<int> > permute(vector<int>& nums){
 }
 
 // optimized approach
+
+// pass nums with or without reference doesnot matter, since we are backtracking aways
 void find_permutation(vector<int> &nums, int index, vector<vector<int> > &ans){
     if(index >= nums.size()){
         ans.push_back(nums);
