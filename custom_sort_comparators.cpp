@@ -101,4 +101,50 @@ int main(){
 		cout<<it<<" ";
 	}
 }
-//********************************************
+//**************************************************************
+class comp{
+public:
+	bool operator ()(int a, int b){
+		// a > b for min heap
+		// b > a for max heap
+		return a > b;
+	}
+};
+
+int main(){
+	//priority_queue<type, vector<type>>
+	//               type,  container->vector<int> by default, comparator(greater/less(default))
+	priority_queue<int , vector<int>, comp> pq;
+	pq.push(1);
+	pq.push(2);
+	pq.push(2);
+
+	while(!pq.empty()){
+		cout<<pq.top()<<endl;
+		pq.pop();
+	}
+}
+
+//**************************************************************
+class comp{
+public:
+	bool operator ()(pair<int, string> a, pair<int, string> b){
+		if(a.first == b.first){
+			return a.second > b.second;
+		}
+		return a.first < b.first;
+	}
+};
+
+int main(){
+	priority_queue<pair<int, string> , vector<pair<int, string> >, comp> pq;
+	pq.push({1, "abcd"});
+	pq.push({2, "zys"});
+	pq.push({2, "abd"});
+
+	while(!pq.empty()){
+		cout<<pq.top().first<<" "<<pq.top().second<<endl;
+		pq.pop();
+	}
+}
+//***********************************************************
