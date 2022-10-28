@@ -7,7 +7,8 @@ using namespace std;
 */
 
 vector<int> prime(100, 1);
-
+//O(nlogn) generally checking for 2, also 4, also 6, also 8 etc.
+//O(nlog(logn)) checking only for primes.
 int main(){
 	prime[0] = 0;
 	prime[1] = 0;
