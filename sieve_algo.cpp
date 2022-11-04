@@ -1,11 +1,19 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-/*to check if a number is number we need to check if there exists a number
-  that is less then sqrt(n) that divides n, because factor n let p and q
+/*to check if a number is prime we only need to check if there exists a number
+  that is less then sqrt(n) that divides n, because factor n, let p and q
   be the factors then p & q cannot be > sqrt(n).
 */
 
+/*
+  to check if number is prime
+  for(int i = 1; i <= sqrt(n); i++){
+       if(n%i == 0){
+          return false;
+       }
+  }
+*/
 vector<int> prime(100, 1);
 //O(nlogn) generally checking for 2, also 4, also 6, also 8 etc.
 //O(nlog(logn)) checking only for primes.
@@ -15,6 +23,7 @@ int main(){
 
 	for(int i = 2; i <= 100; i++){
 		if(prime[i] == 1){
+			//j = i*i
 			for(int j = 2*i; j <= 100; j = j+i){
 				prime[j] = 0;
 			}
