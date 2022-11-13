@@ -66,6 +66,42 @@ void dijkstras(int V, int scr, vector<pair<int, int> > adjL[]){
 	}
 }
 
+//using set
+vector <int> dijkstra(int V, vector<vector<int>> adj[], int S){      
+    vector<int> dis(V, INT_MAX);
+    set<pair<int, int> > s;
+    dis[S] = 0;
+    s.insert({dis[S], S});
+        
+    while(!s.empty()){
+        auto it = *(s.begin());
+            
+        int node = it.second;
+        int prev = it.first;
+        s.erase({dis[node], node});
+            
+        for(auto jt: adj[node]){
+            int ele = jt[0];
+            int wgt = jt[1];
+                
+            if(dis[node]+wgt < dis[ele]){
+                if(dis[ele] != INT_MAX){
+                    s.erase({dis[ele], ele});
+                }
+                dis[ele] = dis[node]+wgt;
+                s.insert({dis[ele], ele});
+            }
+        }
+    }
+    
+    for(int i = 0; i < V; i++){
+        if(dis[i] == INT_MAX){
+            dis[i] = -1;
+        }
+    }
+    return dis;    
+}
+
 int main(){
 	int V, E;
 	cin>>V>>E;
