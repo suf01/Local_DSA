@@ -56,3 +56,45 @@ int shortestPath(vector<vector<int>> &grid, pair<int, int> source, pair<int, int
     }
     return -1;
 }
+
+int shortestPath(vector<vector<int>> &grid, pair<int, int> source, pair<int, int> destination){
+        
+    int n = grid.size();
+    int m = grid[0].size();
+        
+    if(grid[source.first][source.second] == 0){
+        return -1;
+    }
+        
+    queue<pair<int, pair<int, int> > > q;
+    q.push({0,{source.first, source.second}});
+        
+    grid[source.first][source.second] = 0;
+        
+    int delr[] = {-1, 0, 1, 0};
+    int delc[] = {0, 1, 0, -1};
+        
+    while(!q.empty()){
+        int r = q.front().second.first;
+        int c = q.front().second.second;
+            
+        int prev = q.front().first;
+        q.pop();
+            
+        if(r == destination.first && c == destination.second){
+            return prev;
+        }
+            
+        for(int i = 0; i < 4; i++){
+            int newr = r+delr[i];
+            int newc = c+delc[i];
+                
+            if(newr >= 0 && newr < n && newc >= 0 && newc < m && grid[newr][newc] == 1){
+                q.push({prev+1, {newr, newc}});
+                grid[newr][newc] = 0;
+            }
+        }
+        
+    }
+    return -1;
+}
