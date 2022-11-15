@@ -42,6 +42,7 @@ if x is a number -x is the two's compliment of x
 */
 
 //right most set bit mask = x & -x
+//for position of rsbm, val = x & (-x), rsbm = log2(val)+1
 
 /*
 Kernighan's Algorithm: check no of set bits in a number in O(1)
