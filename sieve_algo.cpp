@@ -8,7 +8,7 @@ using namespace std;
 
 /*
   to check if number is prime
-  for(int i = 1; i <= sqrt(n); i++){
+  for(int i = 2; i <= sqrt(n); i++){
        if(n%i == 0){
           return false;
        }
