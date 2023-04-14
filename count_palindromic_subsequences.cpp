@@ -5,7 +5,7 @@ int countPalindromes(string s) {
     int n = s.size();
 
     vector<vector<int>> dp(n, vector<int>(n, 0));
-
+    
     int ans = 0;
     for(int g = 0; g < n; g++){
         for(int i = 0, j = g; j < n; i++, j++){
@@ -23,9 +23,6 @@ int countPalindromes(string s) {
                 }else{
                     dp[i][j] = dp[i][j-1]+dp[i+1][j]-dp[i+1][j-1];
                 }
-            }
-            if(j-i+1 == 5){
-                ans = max(ans, dp[i][j]);
             }
         }
     }
