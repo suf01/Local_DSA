@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
 using namespace std;
 /*
-  --> T.C O(v^2)
+  --> T.C O(v^2) // O(V + E*logV)
   --> works for both directed and undirected graphs.
   --> may or maynot work for negative weights(use bellman ford). 
 */
