@@ -920,7 +920,7 @@ void flatten_iterative(TreeNode* root) {
             curr->left = NULL;
         }
     }
-    }
+}
 
 int main(){
     node* root = new node(-3);
