@@ -881,6 +881,47 @@ void flatten(node* root){
     prevs = root;
 }
 
+void flatten_morris(TreeNode* root) {
+    if(root == NULL) return;
+    
+    TreeNode* curr = root;
+    while(curr){
+        if(curr->left == NULL){
+            curr = curr->right;
+        }else{
+            TreeNode* temp = curr->left;
+            while(temp->right){
+                temp = temp->right;
+            }
+            temp->right = curr->right;
+            curr->right = curr->left;
+            curr->left = NULL;
+
+            curr = curr->right;
+        }
+    }
+}
+
+void flatten_iterative(TreeNode* root) {
+    if(root == NULL) return;
+    
+    stack<TreeNode*> st;
+    st.push(root);
+
+    while(!st.empty()){
+        TreeNode* curr = st.top();
+        st.pop();
+
+        if(curr->right) st.push(curr->right);
+        if(curr->left) st.push(curr->left);
+
+        if(!st.empty()){
+            curr->right = st.top();
+            curr->left = NULL;
+        }
+    }
+    }
+
 int main(){
     node* root = new node(-3);
     root->left = new node(5);
